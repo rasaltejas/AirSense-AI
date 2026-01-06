@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AirSense - Air Quality & Health Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="background-blur"></div>
+    
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="location-info">
+                <h2 class="location">{{ location }}</h2>
+                <p class="date">Today</p>
+            </div>
+            <div class="header-icons">
+                <i class="fas fa-cog"></i>
+            </div>
+        </div>
+
+        <!-- Alert Banner -->
+        <div class="alert-banner alert-danger">
+            <div class="alert-icon">
+                <i class="fas fa-exclamation-circle"></i>
+            </div>
+            <div class="alert-content">
+                <h3>Stay indoors if possible</h3>
+                <p>Air quality is seriously compromised today. Outdoor exposure significantly compromises breathing comfort and general health. Avoid outdoor activities and keep indoor air purified.</p>
+            </div>
+        </div>
+
+        <!-- Weather Metrics Grid -->
+        <div class="metrics-grid">
+            <div class="metric-card aqi-card">
+                <div class="metric-value">{{ aqi }}</div>
+                <div class="metric-label">AQI</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">{{ temperature }}°</div>
+                <div class="metric-label">Temperature</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">{{ humidity }}%</div>
+                <div class="metric-label">Humidity</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">{{ wind_speed }}</div>
+                <div class="metric-label">Wind</div>
+            </div>
+        </div>
+
+        <!-- Air Analysis Section -->
+        <div class="section">
+            <div class="section-header">
+                <i class="fas fa-chart-pie"></i>
+                <h3>Air Analysis</h3>
+            </div>
+            <div class="analysis-content">
+                <p><strong>Air quality is critically poor right now.</strong></p>
+                <p>The Air Quality Index (AQI) has reached unhealthy levels. Pollutant concentration is severely elevated, affecting vulnerable groups. Health impacts include respiratory system stress and cardiovascular concerns.</p>
+                <p>Continued exposure increases health risks considerably. Use this data as an indicator to modify your routine, which may minimize exposure to elevated pollution.</p>
+            </div>
+        </div>
+
+        <!-- Recommended Actions Section -->
+        <div class="section">
+            <div class="section-header">
+                <i class="fas fa-lightbulb"></i>
+                <h3>Recommended Actions</h3>
+            </div>
+            <div class="actions-grid">
+                <div class="action-item action-primary">
+                    <div class="action-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <p><strong>Stay Indoors</strong></p>
+                    <small>Avoid going outside</small>
+                </div>
+                <div class="action-item action-primary">
+                    <div class="action-icon">
+                        <i class="fas fa-wind"></i>
+                    </div>
+                    <p><strong>Use Air Purifier</strong></p>
+                    <small>Clean indoor air quality</small>
+                </div>
+                <div class="action-item action-primary">
+                    <div class="action-icon">
+                        <i class="fas fa-mask"></i>
+                    </div>
+                    <p><strong>Use N95 Masks</strong></p>
+                    <small>If outdoor movement unavoidable</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Forecast Section -->
+        <div class="section">
+            <div class="section-header">
+                <i class="fas fa-calendar-alt"></i>
+                <h3>Forecast</h3>
+            </div>
+            <div class="forecast-grid">
+                {% for day in forecast %}
+                <div class="forecast-item">
+                    <div class="day">{{ day.day }}</div>
+                    <div class="date">{{ day.date }}</div>
+                    <div class="aqi-badge">{{ day.aqi }}</div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
